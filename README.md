@@ -7,15 +7,15 @@ An integration code to produce electron trajectories for various fields.
 `ode_solver.py` is the generic integration code with no fields while `undulator.py` and `chicane.py` are copies with the specific fields already defined. 
 
 There are two funtions which define the fields for all values of position and time:
-
-> def E_fun(r,t,params):
->     x, y, z = r
->     q, m, c = params
->     Ex = 0.
->     Ey = 0.
->     Ez = 0.
->     return np.array([Ex,Ey,Ez])
-
+```
+def E_fun(r,t,params):
+     x, y, z = r
+     q, m, c = params
+     Ex = 0.
+     Ey = 0.
+     Ez = 0.
+     return np.array([Ex,Ey,Ez])
+```
 The initial values defined in the main method allow the user to change the electron energy and initial direction. It is important to note that Clara2 assumes by default that the particle will be traveling along the x-axis. This can be changed in ```~/clara2-dev/src/all_directions.cpp``` if desired. The params vector is useful for passing variables about the fields to the field function.
 
 The integrator runs for a default of 2000 time steps. This can be changed for finer resolution if the fields change too rapidly. Because Clara2 implements an interpelation scheme, it is unlikely you will need more than 2000 time steps for to resolve the radiation. 
@@ -41,25 +41,27 @@ The position (x,y,z) is in meters, the velocity is in (m/s) per c, and time is i
 Clara2 is a code borrowed from [another project](https://github.com/ComputationalRadiationPhysics/clara2) and licensed under GPLv3+. See that page for a list of dependencies and licence and reference information. The version located in this repository has been edited slightly for this file structure. 
 
 The simulation parameters can be edited in `settings.hpp`
-
-> omega_max : The maximum frequency of the spectrum
-> theta_max : The simulation looks from -theta -> +theta
-> N_spectrum: Frequency resolution of the spectrum
-> N_theta   : Angular resolution of the spectrum
-> N_trace   : Number of particles (due to an OB1 error subtract 1 from your actual particle number)
+```
+omega_max : The maximum frequency of the spectrum
+theta_max : The simulation looks from -theta -> +theta
+N_spectrum: Frequency resolution of the spectrum
+N_theta   : Angular resolution of the spectrum
+N_trace   : Number of particles (due to an OB1 error subtract 1 from your actual particle number)
+```
 
 Be sure to call the makefile any time `settings.hpp` is edited.
 
 After generating a trajectory with the field-solver, run
-
-> ./executable
-> ./process_data
+```
+./executable
+./process_data
+```
 
 to generate the spectrum of your trajectory 
 
 This spectrum can then be displayed with by calling 
 
-> ../tools/plotRadiation ./my_spectrum_all_000.dat --dataExtend 0 [max_omega] [min_angle] [max_angle]
+../tools/plotRadiation ./my_spectrum_all_000.dat --dataExtend 0 [max_omega] [min_angle] [max_angle]
 
 The flag --dataExtend allows you to label the axes with the proper angle and frequency
 
