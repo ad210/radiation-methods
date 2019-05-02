@@ -1030,7 +1030,7 @@ delta: inf
 9.99023e+15
 check: filename: ./data/trace_0000.txt
 load file: ./data/trace_0000.txt
-linenumber: 10002
+linenumber: 30002
 Computing: 0 of 512
 calculating theta: -1.5 phi: 0
 calculate direction:    0 -> theta: -1.50000 , phi: 0.00000 
@@ -2568,5 +2568,5 @@ Computing: 511 of 512
 calculating theta: 1.5 phi: 90
 calculate direction:  511 -> theta: 1.50000 , phi: 90.00000 
 check: output-filename: ./output/my_spectrum_trace000000.dat
-time needed: 1.56095 sec
-time per direction (and trace): 0.00304872 sec
+time needed: 3.86165 sec
+time per direction (and trace): 0.00754229 sec
