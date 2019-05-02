@@ -5,10 +5,10 @@ This repository is a collection of several programs used to simulate radiation b
 An integration code to produce electron trajectories for various fields. 
 
 /field-solver/ode\_solver.py is the generic integration code with no fields while
-```
-undulator.py
-chicane.py
-```
+
+```undulator.py```
+```chicane.py```
+
 are copies of ode\_solver.py with the specific fields already defined. 
 
 
