@@ -16,18 +16,11 @@ def E_fun(r,t,params):
      Ez = 0.
      return np.array([Ex,Ey,Ez])
 ```
-```
-def E_fun(r,t,params):
-     x, y, z = r
-     q, m, c = params
-     Ex = 0.
-     Ey = 0.
-     Ez = 0.
-     return np.array([Ex,Ey,Ez])
-```
 The initial values defined in the main method allow the user to change the electron energy and initial direction. It is important to note that Clara2 assumes by default that the particle will be traveling along the x-axis. This can be changed in ```~/clara2-dev/src/all_directions.cpp``` if desired. The params vector is useful for passing variables about the fields to the field function.
 
-The integrator runs for a default of 2000 time steps. This can be changed for finer resolution if the fields change too rapidly. Because Clara2 implements an interpelation scheme, it is unlikely you will need more than 2000 time steps for to resolve the radiation.
+The integrator runs for a default of 2000 time steps. This can be changed for finer resolution if the fields change too rapidly. Because Clara2 implements an interpelation scheme, it is unlikely you will need more than 2000 time steps for to resolve the radiation. 
+
+```odeint``` takes an optional argument ```hmax=None``` which defines the maximum time step size. This is important for fields that only change suddenly in small regions. To save computation time, odeint will take larger time steps if there is no change in a single time step. This can cause it to step over regions of field if ```hmax``` is not set. 
 
 The code pads the start of the trajectory by ten times the length of the integrator. This zero padding is required by Clara2 because of the fourier analysis used in calculating the far field radiation. A factor of ten was found to be a good balance between resolution and computation speed. If the spectrum looks sharp or fractured, try a longer padding length.
 
