@@ -1,4 +1,4 @@
-# radiation methods
+# radiation-methods
 This repository is a collection of several programs used to simulate radiation by electrons in various fields
 
 ## field-solver
@@ -37,7 +37,7 @@ The position (x,y,z) is in meters, the velocity is in (m/s) per c, and time is i
 ```tools.py``` is a collection of functions which are used in main for various purposes.
 
 ## Clara2
-Clara2 is a code borrowed from [another project](https://github.com/ComputationalRadiationPhysics/clara2). See that page for a list of dependencies and licence and reference information. The version located in this repository has been edited slightly for this file structure. 
+Clara2 is a code borrowed from [another project](https://github.com/ComputationalRadiationPhysics/clara2) and licensed under GPLv3+. See that page for a list of dependencies and licence and reference information. The version located in this repository has been edited slightly for this file structure. 
 
 The simulation parameters can be edited in ```settings.hpp```
 ```
