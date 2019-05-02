@@ -16,7 +16,15 @@ def E_fun(r,t,params):
      Ez = 0.
      return np.array([Ex,Ey,Ez])
 ```
-
+```
+def E_fun(r,t,params):
+     x, y, z = r
+     q, m, c = params
+     Ex = 0.
+     Ey = 0.
+     Ez = 0.
+     return np.array([Ex,Ey,Ez])
+```
 The initial values defined in the main method allow the user to change the electron energy and initial direction. It is important to note that Clara2 assumes by default that the particle will be traveling along the x-axis. This can be changed in ```~/clara2-dev/src/all_directions.cpp``` if desired. The params vector is useful for passing variables about the fields to the field function.
 
 The integrator runs for a default of 2000 time steps. This can be changed for finer resolution if the fields change too rapidly. Because Clara2 implements an interpelation scheme, it is unlikely you will need more than 2000 time steps for to resolve the radiation.
