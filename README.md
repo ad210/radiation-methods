@@ -34,10 +34,21 @@ Finally, Clara2 takes trajectories in .csv files of the form:
 
 The position (x,y,z) is in meters, the velocity is in (m/s) per c, and time is in seconds.
 
-
+```tools.py``` is a collection of functions which are used in main for various purposes.
 
 ## Clara2
-Clara2 is a code borrowed from [another project](https://github.com/ComputationalRadiationPhysics/clara2).
+Clara2 is a code borrowed from [another project](https://github.com/ComputationalRadiationPhysics/clara2). See that page for a list of dependencies and licence and reference information. The version located in this repository has been edited slightly for this file structure. 
+
+The simulation parameters can be edited in ```settings.hpp```
+```
+omega_max : The maximum frequency of the spectrum
+theta_max : The simulation looks from -theta -> +theta
+N_spectrum: Frequency resolution of the spectrum
+N_theta   : Angular resolution of the spectrum
+N_trace   : Number of particles (due to an OB1 error subtract 1 from your actual particle number)
+```
+
+Be sure to call the makefile any time ```settings.hpp``` is edited.
 
 After generating a trajectory with the field-solver, run
 ```
@@ -46,7 +57,7 @@ After generating a trajectory with the field-solver, run
 ```
 to generate the spectrum of your trajectory 
 
-This spectrum can be displayed with by calling 
+This spectrum can then be displayed with by calling 
 ```
 ../tools/plotRadiation ./my_spectrum_all_000.dat --dataExtend 0 [max_omega] [min_angle] [max_angle]
 ```

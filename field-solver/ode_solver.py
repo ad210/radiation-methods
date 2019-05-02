@@ -76,7 +76,6 @@ def main():
     for row in usoln:
         psoln = np.append(psoln,[row],axis=0)
 
-
     # ====== Display and File Saving ====== #
     if SHOW_PLOT:
         tools.plot_trajectory(psoln.transpose())
