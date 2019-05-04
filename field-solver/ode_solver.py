@@ -80,7 +80,7 @@ def main():
     if SHOW_PLOT:
         tools.plot_trajectory(psoln.transpose())
     if SAVE_FILE:
-        filename = "../clara2-dev/src/data/trace_" + str(n).zfill(4) + ".txt"
+        filename = "../clara2-dev/src/data/trace_" + str(0).zfill(4) + ".txt"
         tools.write_csv(filename,psoln,time_intv,0)
 
 if __name__ == "__main__":

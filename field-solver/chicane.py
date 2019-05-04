@@ -57,11 +57,9 @@ def relativistic_f(y,t,params):
 # ====== Work Done Here ====== # 
 # ============================ #
 SHOW_PLOT = 1
-SHOW_PARAM = 1 
-SAVE_FILE = 0
-num_particles = 1
+SAVE_FILE = 1 
 
-for n in range(0,num_particles):
+def main():
     [q_e,m_e,c,tau] = tools.get_constants()
     
     # ====== Define Chicane Properties ====== #
@@ -99,11 +97,13 @@ for n in range(0,num_particles):
     for row in usoln:
         psoln = np.append(psoln,[row],axis=0)
     
-    #print psoln[:,0:2] 
 
     # ====== Display and File Saving ====== #
     if SHOW_PLOT:
         tools.plot_trajectory(psoln.transpose())
     if SAVE_FILE:
-        filename = "../clara2-dev/src/data/trace_" + str(n).zfill(4) + ".txt"
+        filename = "../clara2-dev/src/data/trace_" + str(0).zfill(4) + ".txt"
         tools.write_csv(filename,psoln,time_intv,0)
+
+if __name__ == "__main__":
+    main()

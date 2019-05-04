@@ -65,32 +65,34 @@ def symplectic_pos(coords,time_range,params):
     
     return qsoln, psoln, esoln
 
-rx, ry = [0,0]
-px, py = [1 ,0]
+def main():
+    rx, ry = [0,0]
+    px, py = [1 ,0]
 
-B = 0.1; dt = 0.1;
+    B = 0.1; dt = 0.1;
 
-coords = [rx,ry,px,py]
-params = [B,dt]
+    coords = [rx,ry,px,py]
+    params = [B,dt]
 
-time_range = np.arange(0,10000*dt,dt)
+    time_range = np.arange(0,10000*dt,dt)
 
-qsoln, psoln, esoln = symplectic_pos(coords,time_range,params)
-osoln = odeint(odeint_eq, coords, time_range, args=(params,)) 
+    qsoln, psoln, esoln = symplectic_pos(coords,time_range,params)
+    osoln = odeint(odeint_eq, coords, time_range, args=(params,)) 
 
-a = list(map(lambda t: math.pi/2 - t/10, time_range))
-x = list(map(lambda t: 10*math.cos(t),a))
-y = list(map(lambda t: 10*math.sin(t)-10,a))
+    a = list(map(lambda t: math.pi/2 - t/10, time_range))
+    x = list(map(lambda t: 10*math.cos(t),a))
+    y = list(map(lambda t: 10*math.sin(t)-10,a))
 
-time = np.arange(0,len(qsoln))
-H_ode = list(map(lambda i: osoln[2][i]**2 + osoln[3][i]**2 - (B/2)*(osoln[2][i]*osoln[1][i] - osoln[3][i]*osoln[0][i]) +(B**2 / 8)*(osoln[0][i]**2 + osoln[1][i]**2),time))
-H_sym = list(map(lambda i: psoln[0][i]**2 + psoln[1][i]**2 - (B/2)*(psoln[0][i]*qsoln[1][i] - psoln[1][i]*qsoln[0][i]) +(B**2 / 8)*(qsoln[0][i]**2 + qsoln[1][i]**2),time))
+    time = np.arange(0,len(qsoln))
+    H_ode = list(map(lambda i: osoln[2][i]**2 + osoln[3][i]**2 - (B/2)*(osoln[2][i]*osoln[1][i] - osoln[3][i]*osoln[0][i]) +(B**2 / 8)*(osoln[0][i]**2 + osoln[1][i]**2),time))
+    H_sym = list(map(lambda i: psoln[0][i]**2 + psoln[1][i]**2 - (B/2)*(psoln[0][i]*qsoln[1][i] - psoln[1][i]*qsoln[0][i]) +(B**2 / 8)*(qsoln[0][i]**2 + qsoln[1][i]**2),time))
 
-fig = plt.figure()
-ax = fig.gca()
-ax.plot(qsoln[0])
-ax.plot(osoln.transpose().tolist()[0])
-#ax.plot(y)
-#ax.plot(time,osoln.transpose().tolist()[0],time,qsoln[0])
-plt.show()
+    fig = plt.figure()
+    ax = fig.gca()
+    ax.plot(qsoln[0])
+    ax.plot(osoln.transpose().tolist()[0])
+    plt.show()
 
+
+if __name__ == "__main__":
+    main()

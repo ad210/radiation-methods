@@ -53,14 +53,12 @@ def relativistic_f(y,t,params):
 # ====== Work Done Here ====== # 
 # ============================ #
 SHOW_PLOT = 1
-SHOW_PARAM = 0
 SAVE_FILE = 1
-num_particles = 1
 
 [q_e,m_e,c,tau] = tools.get_constants()
 q_e = -q_e
 
-for n in range(0,num_particles):
+def main():
     # ====== Define Undulator Properties ====== #
     K_und = 1.038                   # undulator parameter
     lambda_und = .1106              # spactial period
@@ -89,7 +87,7 @@ for n in range(0,num_particles):
     usoln = odeint(relativistic_f, y_0, time_range, args=(params,))
 
     # ====== Generate Padding ====== #
-    p_length = 10*L_und + (vi*time_intv*n * 20)
+    p_length = 10*L_und 
     time_pad = p_length/(vi)
     pad_step = time_pad/time_intv
 
@@ -98,12 +96,12 @@ for n in range(0,num_particles):
         psoln = np.append(psoln,[row],axis=0)
 
     # ====== Display and File Saving ====== #
-    if SHOW_PARAM:
-        tools.print_parameters(undulator_params)   
     if SHOW_PLOT:
         tools.plot_trajectory(psoln.transpose())
 
     if SAVE_FILE:
-        print("Saving Trace: " + str(n).zfill(2))
-        filename = "../clara2-dev/src/data/trace_" + str(n).zfill(4) + ".txt"
+        filename = "../clara2-dev/src/data/trace_" + str(0).zfill(4) + ".txt"
         tools.write_csv(filename,psoln,time_intv,0)
+
+if __name__ == "__main__":
+    main()
