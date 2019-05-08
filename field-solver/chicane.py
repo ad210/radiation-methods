@@ -4,6 +4,9 @@ import math
 
 import tools
 
+def sig(x,w,b):
+    return (2/math.pi) *math.atan(w*(x-b)) + 1
+
 # Define spacially and temporally dependent E field by components
 def E_fun(r,t,params):
     x, y, z = r
@@ -21,17 +24,33 @@ def B_fun(r,t,params):
     By = 0.
     Bz = 0.0
     
-    if x >= 0.0 and x < 0.5:
-        Bz = A;
-    if x >= 5.5 and x < 6.0:
-        Bz = -A;
-    if x >= 7.0 and x < 7.5:
-        Bz = -A;
-    if x >= 12.5 and x < 13.0:
-        Bz = A;
+    #if x >= 0.0 and x < 0.05:
+    #    Bz = A;
+    #if x >= .55 and x < .60:
+    #    Bz = -A;
+    #if x >= .70 and x < .75:
+    #    Bz = -A;
+    #if x >= 1.25 and x < 1.30:
+    #    Bz = A;
     
+    w = 500; 
+    Bz =        sig(x,w,0.05) - sig(x,w,0.55)
+    Bz = Bz +  -sig(x,w,5.55) + sig(x,w,6.05)
+    Bz = Bz +  -sig(x,w,7.05) + sig(x,w,7.55)
+    Bz = Bz +   sig(x,w,12.55) - sig(x,w,13.05) 
+    Bz = A*Bz
+
+    #if x >= .4 and x < .5:
+    #    Bz = -A;
+    #if x >= .70 and x < .8:
+    #    Bz = -A;
+    #if x >= 1.1 and x < 1.2:
+    #    Bz = A;
+    
+
+
     return np.array([Bx,By,Bz])
-        
+   
 
 def relativistic_f(y,t,params):
     # Unpacking arguments
@@ -64,13 +83,12 @@ def main():
     
     # ====== Define Chicane Properties ====== #
     L = 14.0 
-    gamma_e = 195.69                     # electron lorentz factor
+    gamma_e = 195.00                     # electron lorentz factor
     beta = math.sqrt(1 - 1/gamma_e**2)
     mc_q = 0.001704509
     
-    R = 10.35
+    R = 10.35*10
     B = beta*gamma_e*mc_q/R              # b-field calculation
-    
     print B
     # ======= Initial Values ====== #
     vi = math.sqrt(1-(1./gamma_e)**2)*c
@@ -89,7 +107,7 @@ def main():
     usoln = odeint(relativistic_f, y_0, time_range, args=(params,),hmax=time_intv)
     
     # ====== Generate Padding ====== #
-    p_length = 10*L
+    p_length = 5*L
     time_pad = p_length/(vi)
     pad_step = time_pad/time_intv
     

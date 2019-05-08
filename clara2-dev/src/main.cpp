@@ -28,7 +28,7 @@
 
 int main(void)
 {
-  printf("start\n");
+  //printf("start\n");
 
   int numtasks, rank;
 

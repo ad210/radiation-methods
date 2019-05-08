@@ -82,7 +82,7 @@ def main():
     # ====== Run Integrater ====== #    
     steps = 2000.
     time_intv = L_und/(vi*steps)
-    time_undulat = 5*L_und/vi
+    time_undulat = L_und/vi
     time_range = np.arange(0.0,time_undulat,time_intv)
     usoln = odeint(relativistic_f, y_0, time_range, args=(params,))
 
