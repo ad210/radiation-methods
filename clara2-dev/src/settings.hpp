@@ -23,9 +23,9 @@
 
 namespace param
 {
-const double omega_min                 = 0E15;   /* minimum of plotted frequency Hz */  
-const double omega_max                 = 1E15; /* maximum of plotted frequency Hz */
-const double theta_max                 = 1.0;   /* maximum of theta in degree */
+const double omega_min                 = 0E15;    /* minimum of plotted frequency Hz */  
+const double omega_max                 = 1E15;    /* maximum of plotted frequency Hz */
+const double theta_max                 = 1.00;    /* maximum of theta in degree */
 const unsigned int N_spectrum          = 1024;    /* number of frequencies "omega" */
 const unsigned int N_theta             = 256;     /* number of directions in first angle "theta" */
 const unsigned int N_phi               = 2;       /* number of directions in second angle "phi" */

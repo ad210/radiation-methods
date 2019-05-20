@@ -48,6 +48,8 @@ def plot_trajectory(psoln,proj="3D"):
         ax = fig.gca()
         ax.plot(psoln[0,:].tolist()[0], psoln[1,:].tolist()[0])
     ax.legend()
+    plt.xlabel('x')
+    plt.ylabel('y')
     plt.show()
 
 def print_parameters(param):

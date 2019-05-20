@@ -87,7 +87,7 @@ def main():
     beta = math.sqrt(1 - 1/gamma_e**2)
     mc_q = 0.001704509
     
-    R = 10.35*10
+    R = 10.35*20
     B = beta*gamma_e*mc_q/R              # b-field calculation
     print B
     # ======= Initial Values ====== #
@@ -100,7 +100,7 @@ def main():
     y_0 = [rx, ry, rz, vx, vy, vz]
     
     # ====== Run Integrater ====== #    
-    steps = 2000.
+    steps = 3000.
     time_intv = L/(vi*steps)
     time_undulat = L/vi
     time_range = np.arange(0.0,time_undulat,time_intv)

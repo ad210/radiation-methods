@@ -11,7 +11,7 @@ SHOW_PLOT = True
 
 full_array = [];    # Saves spectrum at all trace points 
 step_size  = 2      # size of each splice
-num_points = 2000   # total number of points in trace file
+num_points = 3000   # total number of points in trace file
 
 
 # === file handling === #
@@ -26,11 +26,11 @@ trace_array = np.loadtxt(open(temp_file,'r'),delimiter = " ")
 
 
 # === main loop === #
-for cut_off in range(0, num_points, step_size):
+for cut_off in range(0, 200, step_size):
     
     print "\n\nINDEX: " + str(cut_off) +" out of " +str(num_points)+"\n"
 
-    temp = np.array(trace_array[:-(2000-cut_off)])
+    temp = np.array(trace_array[:-(num_points-cut_off)])
     np.savetxt(trace_file, temp, delimiter=" ")
 
     os.system('./executable --silent')
