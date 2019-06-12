@@ -15,16 +15,27 @@ def E_fun(r,t,params):
 
     d = 0.5
     A = 1E6 #4.576E5
+    w = math.pi/1.66784E-9
 
     if x < d:
-        Ey = -A
-        #Ey =  9.262E6 
+         Ey = -A*math.pi/2*math.sin(w*t)
     if x > 5.0 and x < 5.0 + d:
-        Ey = A 
+         Ey = A*math.pi/2*math.sin(w*t)
     if x > 6.0 and x < 6.0 + d:
-        Ey = A
+        Ey = A*math.pi/2*math.sin(w*t)
     if x >11.0 and x < 11.0+ d:
-        Ey = -A
+        Ey = -A*math.pi/2*math.sin(w*t)
+   
+    #if x < d:
+    #     Ey = -A
+    #if x > 5.0 and x < 5.0 + d:
+    #     Ey = A
+    #if x > 6.0 and x < 6.0 + d:
+    #    Ey = A
+    #if x >11.0 and x < 11.0+ d:
+    #    Ey = -A
+    
+
 
     return np.array([Ex,Ey,Ez]) 
 
@@ -35,6 +46,7 @@ def B_fun(r,t,params):
     Bx = 0.
     By = 0.
     Bz = 0.
+
 
     return np.array([Bx,By,Bz])
         
@@ -92,7 +104,8 @@ def main():
     psoln = tools.generate_padding([vx_init,vy_init],time_intv,pad_step)  
     for row in usoln:
         psoln = np.append(psoln,[row],axis=0)
-
+    
+    print psoln
     # ====== Display and File Saving ====== #
     if SHOW_PLOT:
         tools.plot_trajectory(psoln.transpose())

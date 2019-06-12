@@ -100,14 +100,14 @@ def main():
     y_0 = [rx, ry, rz, vx, vy, vz]
     
     # ====== Run Integrater ====== #    
-    steps = 3000.
+    steps = 2000.
     time_intv = L/(vi*steps)
     time_undulat = L/vi
     time_range = np.arange(0.0,time_undulat,time_intv)
     usoln = odeint(relativistic_f, y_0, time_range, args=(params,),hmax=time_intv)
     
     # ====== Generate Padding ====== #
-    p_length = 5*L
+    p_length = 10*L
     time_pad = p_length/(vi)
     pad_step = time_pad/time_intv
     
